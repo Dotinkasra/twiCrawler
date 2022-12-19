@@ -1,0 +1,6 @@
+.DS_Store
+movie
+venv
+__pycache__
+.vscode
+*.db
