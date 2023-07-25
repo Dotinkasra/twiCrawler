@@ -1,3 +1,4 @@
+from module.module import Modules
 import sqlite3
 
 class DB():
@@ -7,24 +8,38 @@ class DB():
     def insert_single_url(self, url: str):
         if not url:
             return
+        
+        video_id = Modules.extract_file_name_from_url(url)
+        if not video_id:
+            return
+        
         self.dba.insert(
+            sql =
             '''
             INSERT INTO 
-            url_records (url) VALUES (?);
-            ''', (url,), "url_records"
+            url_records (video_id, url) VALUES (?, ?);
+            ''',
+            parameta = (video_id, url,),
+            table_name = "url_records"
         )
 
     def check_url_exists(self, url: str) -> bool:
+        if not url:
+            return
+        
+        video_id = Modules.extract_file_name_from_url(url)
+        if not video_id:
+            return
+
         result = self.dba.select(
             '''
             SELECT count(*)
             FROM url_records
-            WHERE url = ?;
-            ''', (url,)
+            WHERE video_id = ?;
+            ''', (video_id,)
         )
-        if result[0][0] > 0:
-            return True
-        return False
+
+        return True if result[0][0] > 0 else False
 
 class DBaccess():
     def __init__(self, dbname) -> None:

@@ -6,8 +6,8 @@ class Main():
     def __init__(self) -> None:
         self.twidouga = Twidouga()
         self.twivideo = Twivideo()
-        #schedule.every().days.at("12:00").do(self.twidouga.do)
-        #schedule.every().days.at("12:00").do(self.twivideo.do)
+        #schedule.every().days.at("12:25").do(self.twidouga.do)
+        #schedule.every().days.at("12:25").do(self.twivideo.do)
         schedule.every(2).hours.do(self.twivideo.do)
         schedule.every(2).hours.do(self.twidouga.do)
 

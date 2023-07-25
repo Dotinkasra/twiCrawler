@@ -9,11 +9,12 @@ class Twidouga():
 
     def __init__(self) -> None:
         ssl._create_default_https_context = ssl._create_unverified_context
-
-        user_agent = 'Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0'
+        home_url = "https://www.twidouga.net"
+        user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36'
         urls = ["https://www.twidouga.net/ranking_t.php", "https://www.twidouga.net/ranking_t2.php"]
         header = {
                 "User-Agent": user_agent,
+                "referer" : home_url
         }
         
         self.converted_html: list[BeautifulSoup] = []
