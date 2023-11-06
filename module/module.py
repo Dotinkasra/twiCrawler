@@ -18,7 +18,12 @@ class Modules():
     def download_mp4(self, url: str, count: int = 0):
         if count > 5 or str is None or str == "":
             return
-        response = requests.get(url)
+        try:
+            response = requests.get(url)
+        except Exception as e:
+            print(url, e)
+            return
+        
         id = self.extract_file_name_from_url(url)
         if id is None or id == '':
             return
