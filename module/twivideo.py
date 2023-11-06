@@ -24,11 +24,11 @@ class Twivideo():
             webd = self.TwivideoDlWithWebDriver(url)
             ret_links_from_webd.append(webd.get_all_video_link())
 
-        video_links = [
+        video_links = list(set([
             video_link 
             for ret_link in ret_links_from_webd
             for video_link in ret_link 
-        ]
+        ]))
 
         db: DB = DB()
         for url in video_links:
@@ -67,19 +67,33 @@ class Twivideo():
                 print("実行")
                 try:
                     i.click()
-                    time.sleep(5)
-                    
-                    if len(self.driver.window_handles) > 1:
-                        self.driver.switch_to.window(self.driver.window_handles[-1])
-                        urls.append(self.driver.current_url)
-                        self.driver.close()
-                        self.driver.switch_to.window(self.driver.window_handles[0])
+                    time.sleep(2)
+                    urls.append(self.switch_tab())
                 except Exception as e:
                     print(e)
                 finally:
-                    continue
+                    self.close_tab()
             self.driver.close()
             return urls
+        
+        def close_tab(self) -> None:
+            if not len(self.driver.window_handles) > 1:
+                return
+            
+            self.driver.switch_to.window(self.driver.window_handles[-1])
+            self.driver.close()
+            self.driver.switch_to.window(self.driver.window_handles[0])
+
+        def switch_tab(self) -> str:
+            if not len(self.driver.window_handles) > 1:
+                return
+            
+            self.driver.switch_to.window(self.driver.window_handles[-1])
+            return str(self.driver.current_url)
+            
+
+
+                
     
 
 
