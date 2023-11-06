@@ -15,7 +15,7 @@ class Twivideo():
         ]
 
     def __get_dynamic_site_html(self, url):
-        driver_path = "/Users/twemu/bin/chromedriver"
+        driver_path = "/Users/twaoi/bin/chromedriver"
         browser_path = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
         options = webdriver.ChromeOptions()
@@ -45,7 +45,7 @@ class Twivideo():
             return hrefs
         except Exception as e:
             print(e)
-            return []     
+            return []
         
     def __get_download_video_link(self) -> list[str]:
         db: DB = DB()
