@@ -16,7 +16,7 @@ class Modules():
 
     @classmethod
     def download_mp4(self, url: str, count: int = 0):
-        if count > 5:
+        if count > 5 or str is None or str == "":
             return
         response = requests.get(url)
         id = self.extract_file_name_from_url(url)

@@ -50,7 +50,7 @@ class Twidouga():
                     continue
                 print("ダウンロードします：{}".format(id))
                 Modules.download_mp4(video)
-                db.insert_single_url(Modules.extract_file_name_from_url(video))
+                db.insert_single_url(video)
 
     def test(self):
         print("test")
